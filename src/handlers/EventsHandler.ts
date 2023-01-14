@@ -1,0 +1,54 @@
+type EventListener<T = any> = (data: T) => void;
+type EventListeners = { [event: string]: Set<EventListener> };
+
+type EventUnsubscribe = () => void;
+export type EventSubscribe = <T>(event: string, callback: EventListener<T>) => EventUnsubscribe;
+
+class EventsHandler {
+  listeners: EventListeners = {};
+
+  constructor(socket: WebSocket) {
+    socket.addEventListener('message', this.handleMessage);
+
+    this.handleMessage = this.handleMessage.bind(this);
+    this.subscribe = this.subscribe.bind(this);
+  }
+
+  private dispatchEvent = (event: string, data: unknown) => {
+    if (this.listeners[event] !== undefined) {
+      this.listeners[event].forEach((callback) => callback(data));
+    } else {
+      console.debug('Push event was recieved but not caught', { event, data });
+    }
+  };
+
+  private setupListener = <T>(event: string, callback: EventListener<T>) => {
+    if (!this.listeners[event]) {
+      this.listeners[event] = new Set();
+    }
+
+    this.listeners[event].add(callback);
+  };
+
+  private handleMessage = (event: MessageEvent) => {
+    const data = JSON.parse(event.data);
+    this.dispatchEvent(data.event, data.message);
+  };
+
+  private unsubscribe = <T>(event: string, callback: EventListener<T>) => {
+    return () => {
+      this.listeners[event].delete(callback);
+
+      if (this.listeners[event].size === 0) {
+        delete this.listeners[event];
+      }
+    };
+  };
+
+  subscribe: EventSubscribe = <T>(event: string, callback: EventListener<T>) => {
+    this.setupListener(event, callback);
+    return this.unsubscribe(event, callback);
+  };
+}
+
+export default EventsHandler;

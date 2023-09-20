@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install git+git@github.com:sourceempire/brawl-websocket.git#v1.0.1
+npm install git+git@github.com:sourceempire/brawl-websocket.git#v1.0.3
 ```
 
 Note that it might be a good idea to download the latest version

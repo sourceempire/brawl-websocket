@@ -19,7 +19,6 @@ function ServerSubscriptionProvider({ serverUrl, children }: Props) {
     return socketHandler.closeConnection;
   }, [serverUrl]);
 
-  // TODO -> Take in full app load skeletion as prop to use it multiple applications
   if (!socket) return <div>Setting up connection...</div>;
 
   return (

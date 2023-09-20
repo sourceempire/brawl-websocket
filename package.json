@@ -1,6 +1,6 @@
 {
   "name": "brawl-websocket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The `ServerSubscriptionProvider` component is a provider component that sets up a WebSocket connection to the server when it mounts, and provides two other provider components - EventSubscribeProvider and FeedSubscribeProvider - as children. These two provider components provide the subscribe function from their respective handler classes (`EventSubscribe` and `FeedSubscribe`) to the context, which can be consumed using the `useEventSubscribe` and `useFeedSubscribe` hooks respectively.",
   "author": "Source Empire AB",
   "license": "ISC",

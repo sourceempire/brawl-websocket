@@ -14,7 +14,7 @@
     "react-dom": ">=18.2.0"
   },
   "dependencies": {
-    "brawl-fetch": "github:sourceempire/brawl-fetch#v1.0.0",
+    "brawl-fetch": "github:sourceempire/brawl-fetch#v1.3.1",
     "sockjs-client": "^1.6.1"
   },
   "devDependencies": {

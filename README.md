@@ -1,5 +1,15 @@
 # brawl-web-socket
 
+## Installation
+
+```bash
+npm install git+git@github.com:sourceempire/brawl-websocket.git#v1.0.1
+```
+
+Note that it might be a good idea to download the latest version
+
+</br >
+
 The `ServerSubscriptionProvider` component is a provider component that sets up a WebSocket connection to the server when it mounts, and provides two other provider components - EventSubscribeProvider and FeedSubscribeProvider - as children. These two provider components provide the subscribe function from their respective handler classes (`EventSubscribe` and `FeedSubscribe`) to the context, which can be consumed using the `useEventSubscribe` and `useFeedSubscribe` hooks respectively.
 
 The SocketHandler class is responsible for setting up the WebSocket connection, and the EventsHandler and FeedsHandler classes provide functions for subscribing to events and feeds respectively.

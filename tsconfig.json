@@ -19,7 +19,7 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "declaration": true,
-        "declarationDir": "src/declarations/",
+        "declarationDir": "dist/declarations/",
         "jsx": "react-jsx",
       },
       "include": [

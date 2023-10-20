@@ -1,11 +1,18 @@
 {
-  "name": "brawl-websocket",
+  "name": "@sourceempire/brawl-websocket",
   "version": "1.0.3",
   "description": "The `ServerSubscriptionProvider` component is a provider component that sets up a WebSocket connection to the server when it mounts, and provides two other provider components - EventSubscribeProvider and FeedSubscribeProvider - as children. These two provider components provide the subscribe function from their respective handler classes (`EventSubscribe` and `FeedSubscribe`) to the context, which can be consumed using the `useEventSubscribe` and `useFeedSubscribe` hooks respectively.",
   "author": "Source Empire AB",
   "license": "ISC",
   "main": "dist/bundle.js",
-  "types": "src/declarations/index.d.ts",
+  "types": "dist/declarations/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourceempire/brawl-websocket.git"
+  },
   "scripts": {
     "build": "webpack"
   },
@@ -14,7 +21,7 @@
     "react-dom": ">=18.2.0"
   },
   "dependencies": {
-    "brawl-fetch": "github:sourceempire/brawl-fetch#v1.3.2",
+    "@sourceempire/brawl-fetch": "^1.4.7",
     "sockjs-client": "^1.6.1"
   },
   "devDependencies": {

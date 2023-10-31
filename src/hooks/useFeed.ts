@@ -3,7 +3,7 @@ import { useFeedSubscribe } from "../context/FeedSubscrbeProvider";
 
 type FeedState<T = unknown> =
   | {
-      loading: true;
+      loading: true; data?: undefined,
     }
   | { loading: false; data: T };
 

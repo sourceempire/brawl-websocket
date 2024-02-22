@@ -6,7 +6,14 @@ type Props = {
   socket: WebSocket;
 };
 
-const FeedSubscribeContext = createContext<FeedSubscribe>({} as FeedSubscribe);
+const defaultFeedSubscribe = () => {
+  console.warn('FeedSubscribe used outside of its Provider');
+  return () => {
+    console.warn('Unsubscribe called outside of FeedSubscribe Provider');
+  };
+}
+
+const FeedSubscribeContext = createContext<FeedSubscribe>(defaultFeedSubscribe);
 
 function FeedSubscribeProvider({ children, socket }: Props) {
   const feedsHandler = useRef<FeedsHandler>(new FeedsHandler(socket));

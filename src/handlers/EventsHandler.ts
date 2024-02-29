@@ -34,6 +34,8 @@ export class EventsHandler {
 
   private handleMessage = (event: MessageEvent) => {
     const data = JSON.parse(event.data);
+    if (!data.event) return;
+    
     this.dispatchEvent(data.event, data.message);
   };
 

@@ -9,6 +9,9 @@ export default defineConfig({
     outDir: 'dist/types',
     include: ["src/hooks/*.{ts,tsx}", "src/context/*.{ts,tsx}", "src/handlers/*.{ts,tsx}", "src/index.ts"],
   })],
+  // define: {
+  //   'global': {}, // Polyfill for `global`
+  // },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),

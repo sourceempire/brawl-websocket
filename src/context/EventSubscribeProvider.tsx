@@ -1,19 +1,33 @@
-import React, { createContext, useContext, useRef } from 'react';
-import { EventsHandler, EventSubscribe } from '../handlers/EventsHandler';
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import { EventsHandler, EventSubscribe } from "../handlers/EventsHandler";
 
 type Props = {
   children: React.ReactNode;
   socket: WebSocket;
 };
 
-const EventSubscribeContext = createContext<EventSubscribe>({} as EventSubscribe);
+const defaultEventSubscribe = () => {
+  console.warn("EventSubscribe used outside of its Provider");
+  return () => {
+    console.warn("Unsubscribe called outside of EventSubscribe Provider");
+  };
+};
+
+const EventSubscribeContext = createContext<EventSubscribe>(defaultEventSubscribe);
 
 function EventSubscribeProvider({ children, socket }: Props) {
-  const eventsHandler = useRef<EventsHandler>(new EventsHandler(socket));
+  const [eventsHandler, setEventsHandler] = useState<EventsHandler | null>(null);
 
-  return (
-    <EventSubscribeContext.Provider value={eventsHandler.current.subscribe}>{children}</EventSubscribeContext.Provider>
-  );
+  useEffect(() => {
+    setEventsHandler(new EventsHandler(socket));
+    return () => eventsHandler?.cleanup();
+  }, [socket]);
+
+  if (!eventsHandler) {
+    return null;
+  }
+
+  return <EventSubscribeContext.Provider value={eventsHandler.subscribe}>{children}</EventSubscribeContext.Provider>;
 }
 
 function useEventSubscribe() {

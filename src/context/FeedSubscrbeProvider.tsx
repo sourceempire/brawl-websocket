@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useRef } from 'react';
-import { FeedsHandler, FeedSubscribe } from '../handlers/FeedsHandler';
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import { FeedsHandler, FeedSubscribe } from "../handlers/FeedsHandler";
 
 type Props = {
   children: React.ReactNode;
@@ -7,20 +7,27 @@ type Props = {
 };
 
 const defaultFeedSubscribe = () => {
-  console.warn('FeedSubscribe used outside of its Provider');
+  console.warn("FeedSubscribe used outside of its Provider");
   return () => {
-    console.warn('Unsubscribe called outside of FeedSubscribe Provider');
+    console.warn("Unsubscribe called outside of FeedSubscribe Provider");
   };
-}
+};
 
 const FeedSubscribeContext = createContext<FeedSubscribe>(defaultFeedSubscribe);
 
 function FeedSubscribeProvider({ children, socket }: Props) {
-  const feedsHandler = useRef<FeedsHandler>(new FeedsHandler(socket));
+  const [feedsHandler, setFeedsHandler] = useState<FeedsHandler | null>(null);
 
-  return (
-    <FeedSubscribeContext.Provider value={feedsHandler.current.subscribe}>{children}</FeedSubscribeContext.Provider>
-  );
+  useEffect(() => {
+    setFeedsHandler(new FeedsHandler(socket));
+    return () => feedsHandler?.cleanup();
+  }, [socket]);
+
+  if (!feedsHandler) {
+    return null;
+  }
+
+  return <FeedSubscribeContext.Provider value={feedsHandler.subscribe}>{children}</FeedSubscribeContext.Provider>;
 }
 
 function useFeedSubscribe() {

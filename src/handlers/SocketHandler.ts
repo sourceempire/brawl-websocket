@@ -13,9 +13,9 @@ export class SocketHandler {
     const result = await brawlFetch<{ token: string }>(`${eventsUrl}/request`);
 
     this.socket = new SockJS(eventsUrl);
-    this.socket!.onerror = this.handleError;
-    this.socket!.onclose = this.handleClose;
-    this.socket!.onopen = () => this.handleOpen(result.token, onConnect);
+    this.socket.onerror = this.handleError;
+    this.socket.onclose = this.handleClose;
+    this.socket.onopen = () => this.handleOpen(result.token, onConnect);
   };
 
   private handleError = (message: Event) => {

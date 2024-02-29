@@ -11,6 +11,7 @@ type Props = {
 export function ServerSubscriptionProvider({ serverUrl, children }: Props) {
   const [socket, setSocket] = useState<WebSocket>();
 
+
   useEffect(() => {
     const socketHandler = new SocketHandler(serverUrl, (ws) => {
       setSocket(ws);

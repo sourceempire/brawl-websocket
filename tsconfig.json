@@ -3,6 +3,8 @@
     "baseUrl": "./src",
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

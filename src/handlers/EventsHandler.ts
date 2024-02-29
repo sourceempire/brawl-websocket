@@ -5,9 +5,11 @@ type EventUnsubscribe = () => void;
 export type EventSubscribe = <T>(event: string, callback: EventListener<T>) => EventUnsubscribe;
 
 export class EventsHandler {
-  listeners: EventListeners = {};
+  private socket: WebSocket;
+  private listeners: EventListeners = {};
 
   constructor(socket: WebSocket) {
+    this.socket = socket
     socket.addEventListener('message', this.handleMessage);
 
     this.handleMessage = this.handleMessage.bind(this);
@@ -45,8 +47,13 @@ export class EventsHandler {
     };
   };
 
-  subscribe: EventSubscribe = <T>(event: string, callback: EventListener<T>) => {
+  public subscribe: EventSubscribe = <T>(event: string, callback: EventListener<T>) => {
     this.setupListener(event, callback);
     return this.unsubscribe(event, callback);
   };
+
+  public cleanup() {
+    this.socket.removeEventListener('message', this.handleMessage);
+    this.listeners = {}
+  }
 }

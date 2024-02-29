@@ -1,0 +1,25 @@
+input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 8px;
+  
+}
+
+.wrapper {
+  font-family: sans-serif;
+}
+
+.feed-warning {
+    background-color: lightyellow;
+    padding: 20px;
+    border: 1px solid darkgoldenrod;
+    color: darkgoldenrod;
+}
+
+.feed-error {
+    background-color: pink;
+    padding: 20px;
+    border: 1px solid red;
+    color: red;
+}

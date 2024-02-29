@@ -20,7 +20,6 @@ export function useFeed<T>(feed: string) {
   }, [state]);
 
   useEffect(() => {
-    setState({ loading: true })
     const unsubscribe = subscribe<T>(feed, (updatedData) => {
       setState({ data: updatedData, loading: false });
     });

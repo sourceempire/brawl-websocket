@@ -4,7 +4,7 @@ type EventListeners = { [event: string]: Set<EventListener> };
 type EventUnsubscribe = () => void;
 export type EventSubscribe = <T>(event: string, callback: EventListener<T>) => EventUnsubscribe;
 
-class EventsHandler {
+export class EventsHandler {
   listeners: EventListeners = {};
 
   constructor(socket: WebSocket) {
@@ -50,5 +50,3 @@ class EventsHandler {
     return this.unsubscribe(event, callback);
   };
 }
-
-export default EventsHandler;

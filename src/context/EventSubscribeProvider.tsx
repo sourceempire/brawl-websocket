@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useRef } from 'react';
-import EventsHandler, { EventSubscribe } from '../handlers/EventsHandler';
+import { EventsHandler, EventSubscribe } from '../handlers/EventsHandler';
 
 type Props = {
   children: React.ReactNode;

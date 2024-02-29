@@ -1,7 +1,7 @@
 import brawlFetch from '@sourceempire/brawl-fetch';
 import SockJS from 'sockjs-client';
 
-class SocketHandler {
+export class SocketHandler {
   private socket: WebSocket | undefined;
 
   constructor(serverUrl: string, onConnect: (ws: WebSocket) => void) {
@@ -44,5 +44,3 @@ class SocketHandler {
     this.socket?.close(1000, 'client');
   };
 }
-
-export default SocketHandler;

@@ -1,6 +1,3 @@
-import ServerSubscriptionProvider from './context';
-
-export default ServerSubscriptionProvider;
-
-export { useFeed } from './hooks/useFeed';
-export { useEvent } from './hooks/useEvent';
+export { ServerSubscriptionProvider } from "./context";
+export { useFeed } from "./hooks/useFeed";
+export { useEvent } from "./hooks/useEvent";

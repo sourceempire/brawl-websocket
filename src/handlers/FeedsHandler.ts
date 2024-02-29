@@ -7,7 +7,7 @@ type CachedState<T = any> = { [feedType: string]: FeedData<T> };
 type FeedUnsubscribe = () => void;
 export type FeedSubscribe = <T>(feed: string, callback: FeedListener<T>) => FeedUnsubscribe;
 
-class FeedsHandler {
+export class FeedsHandler {
   socket: WebSocket;
   listeners: FeedListeners = {};
   cachedStates: CachedState = {};
@@ -63,5 +63,3 @@ class FeedsHandler {
     return this.unsubscribe(feed, callback);
   };
 }
-
-export default FeedsHandler;

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useRef } from 'react';
-import FeedsHandler, { FeedSubscribe } from '../handlers/FeedsHandler';
+import { FeedsHandler, FeedSubscribe } from '../handlers/FeedsHandler';
 
 type Props = {
   children: React.ReactNode;

@@ -4,8 +4,10 @@
   "description": "The `ServerSubscriptionProvider` component is a provider component that sets up a WebSocket connection to the server when it mounts, and provides two other provider components - EventSubscribeProvider and FeedSubscribeProvider - as children. These two provider components provide the subscribe function from their respective handler classes (`EventSubscribe` and `FeedSubscribe`) to the context, which can be consumed using the `useEventSubscribe` and `useFeedSubscribe` hooks respectively.",
   "author": "Source Empire AB",
   "license": "ISC",
-  "main": "dist/bundle.js",
-  "types": "dist/declarations/index.d.ts",
+  "type": "module",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
@@ -14,7 +16,7 @@
     "url": "https://github.com/sourceempire/brawl-websocket.git"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "vite build"
   },
   "peerDependencies": {
     "react": ">=18.2.0",
@@ -25,15 +27,12 @@
     "sockjs-client": "^1.6.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-typescript": "^7.18.6",
     "@types/react": "^18.0.27",
     "@types/sockjs-client": "^1.5.1",
-    "babel-loader": "^9.1.2",
+    "@vitejs/plugin-react": "^4.2.1",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.4",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
   }
 }

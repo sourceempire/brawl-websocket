@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import SocketHandler from '../handlers/SocketHandler';
-import { EventSubscribeProvider } from './EventSubscribeProvider';
-import { FeedSubscribeProvider } from './FeedSubscrbeProvider';
+import React, { useEffect, useState } from "react";
+import { SocketHandler } from "../handlers";
+import { EventSubscribeProvider } from "./EventSubscribeProvider";
+import { FeedSubscribeProvider } from "./FeedSubscrbeProvider";
 
 type Props = {
   serverUrl: string;
   children: React.ReactNode;
 };
 
-function ServerSubscriptionProvider({ serverUrl, children }: Props) {
+export function ServerSubscriptionProvider({ serverUrl, children }: Props) {
   const [socket, setSocket] = useState<WebSocket>();
 
   useEffect(() => {
@@ -27,5 +27,3 @@ function ServerSubscriptionProvider({ serverUrl, children }: Props) {
     </FeedSubscribeProvider>
   );
 }
-
-export default ServerSubscriptionProvider;

@@ -29,22 +29,18 @@ function App() {
 }
 
 function LoggedInView({ feedString }: { feedString: string }) {
-  const [feedWarning, setFeedWarning] = useState<string | null>(null);
+  const [feedError, setFeedError] = useState<string | null>(null);
   useEffect(() => {
-    setFeedWarning(null);
-  }, [feedString])
-  useEvent<{ error: string }>("invalid-feed-string", (event) => setFeedWarning(event.error));
+    setFeedError(null);
+  }, [feedString]);
+  useEvent<{ error: string }>("invalid-feed-string", (event) => setFeedError(event.error));
 
   const { data } = useFeed(feedString);
-  if (!data)
-    return (
-      <div className="wrapper">
-        {feedWarning ? <div className="feed-error">{feedWarning}</div> : <div className="feed-warning">No feed data</div>}
-      </div>
-    );
 
   return (
     <div className="wrapper">
+      {feedError && <div className="feed-error">{feedError}</div>}
+      {!data && <div className="feed-warning">No feed data</div>}
       <pre className="feed-info">{JSON.stringify(data, null, 2)}</pre>
     </div>
   );

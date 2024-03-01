@@ -1,15 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFeedSubscribe } from "../context/FeedSubscrbeProvider";
+
+type Options = {
+  queryParams: Record<string, string>;
+};
 
 type FeedState<T = unknown> =
   | {
-      loading: true; data?: undefined,
+      loading: true;
+      data?: undefined;
     }
   | { loading: false; data: T };
 
-export function useFeed<T>(feed: string) {
+export function useFeed<T>(feed: string, options?: Options) {
   const subscribe = useFeedSubscribe();
   const [state, setState] = useState<FeedState<T>>({ loading: true });
+
+  const serializedQueryParams = useMemo(() => {
+    if (!options || !options.queryParams) return '';
+    const params = new URLSearchParams(options.queryParams).toString();
+    return params ? `?${params}` : '';
+  }, [options?.queryParams]);
+
+  useEffect(() => {
+    const unsubscribe = subscribe<T>(`${feed}${serializedQueryParams}`, (updatedData) => {
+      setState({ data: updatedData, loading: false });
+    });
+    return unsubscribe;
+  }, [feed, subscribe, serializedQueryParams]);
+
 
   useEffect(() => {
     if (!state.loading && !state.data) {
@@ -18,13 +37,6 @@ export function useFeed<T>(feed: string) {
       );
     }
   }, [state]);
-
-  useEffect(() => {
-    const unsubscribe = subscribe<T>(feed, (updatedData) => {
-      setState({ data: updatedData, loading: false });
-    });
-    return unsubscribe;
-  }, [feed, subscribe]);
 
   return state;
 }

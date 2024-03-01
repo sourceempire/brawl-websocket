@@ -8,6 +8,7 @@ input {
 
 .wrapper {
   font-family: sans-serif;
+  max-width: 1000px;
 }
 
 .feed-warning {
@@ -22,4 +23,38 @@ input {
     padding: 20px;
     border: 1px solid red;
     color: red;
+}
+
+.header-and-count {
+    display: flex;
+    gap: 6px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.query-params {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.count-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+}
+
+.query-param {
+    display: flex;
+    gap: 6px;
+}
+
+.key {
+    flex-basis: content;
 }

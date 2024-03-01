@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useFeedSubscribe } from "../context/FeedSubscrbeProvider";
 
 type Options = {
-  queryParams: Record<string, string>;
+  queryParams: Record<string, string | number | boolean | null>;
 };
 
 type FeedState<T = unknown> =
@@ -17,9 +17,13 @@ export function useFeed<T>(feed: string, options?: Options) {
   const [state, setState] = useState<FeedState<T>>({ loading: true });
 
   const serializedQueryParams = useMemo(() => {
-    if (!options || !options.queryParams) return '';
-    const params = new URLSearchParams(options.queryParams).toString();
-    return params ? `?${params}` : '';
+    if (!options?.queryParams) return '';
+
+    const queryParamsString = Object.keys(options.queryParams).map((key) => {
+      return `${key}=${options.queryParams[key]}`
+    }).join('&')
+
+    return `?${queryParamsString}`;
   }, [options?.queryParams]);
 
   useEffect(() => {
